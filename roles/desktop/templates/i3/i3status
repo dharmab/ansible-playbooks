@@ -1,0 +1,31 @@
+general {
+	colors = true
+	interval = 1
+}
+
+order += "cpu_temperature 0"
+#order += "ethernet enp3s0"
+order += "tztime local"
+
+cpu_temperature 0 {
+	format = "CPU: %degrees °C"
+}
+
+#ethernet enp3s0 {
+#	format_up = "Ethernet: %ip (%speed)"
+#	format_down = "Ethernet: down"
+#}
+
+#wireless wlp3s0 {
+#	format_up "%essid: %ip (%speed|%quality)"
+#}
+
+tztime local {
+	format = "%Y-%m-%d %H:%M:%S"
+}
+
+#battery 0 {
+#	format = "Battery: %charging (%percentage)"
+#	path = "sys/class/power_supply/BAT%d/uevent"
+#	low_threshold = 15
+#}

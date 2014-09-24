@@ -1,0 +1,29 @@
+---
+- name: ensure operating system is a Red Hat derivative
+  assert: that="ansible_os_family == 'RedHat'"
+
+- name: install EPEL bootstrap repository
+  copy: src=epel-bootstrap.repo dest=/etc/yum.repos.d/
+  sudo: yes
+
+- name: install EPEL repository
+  yum: name=epel-release enablerepo=epel-bootstrap
+  sudo: yes
+
+- name: enable EPEL repository
+  ini_file: dest=/etc/yum.repos.d/epel.repo section=epel option=enabled value=1
+
+- name: update all packages
+  yum: name=* state=latest
+
+- name: install ntp
+  yum: name=ntp state=present
+
+- name: ensure ntp is enabled
+  service: name=ntpd state=started enabled=yes
+
+- name: ensure sshd is enabled
+  service: name=sshd state=started enabled=yes
+
+- name: ensure firewall is enabled
+  service: name=firewalld state=started enabled=yes

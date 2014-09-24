@@ -1,0 +1,24 @@
+// Default mapcycle file for Team Fortress.
+//
+// DO NOT MODIFY THIS FILE!
+// Instead, copy it to mapcycle.txt and modify that file.  If no custom mapcycle.txt file is found,
+// this file will be used as the default.
+//
+// Also, note that the "mapcyclefile" convar can be used to specify a particular mapcycle file.
+
+arena_badlands
+arena_granary
+ctf_2fort
+arena_lumberyard
+arena_nucleus
+koth_viaduct
+arena_offblast_final
+koth_sawmill
+arena_ravine
+koth_nucleus
+arena_sawmill
+koth_harvest_final
+arena_watchtower
+koth_badlands
+arena_well
+

@@ -1,0 +1,6 @@
+---
+- include: csgoserver.yml
+- include: tf2server.yml
+- include: arma3server.yml
+- include: development.yml
+

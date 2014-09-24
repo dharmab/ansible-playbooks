@@ -1,0 +1,5 @@
+LAN PARTY WOO
+
+Stuff for nerds:
+
+Running on CentOS 7.0 and automated by Ansible. Maintained by Dharma Bellamkonda (github.com/dharmab). 

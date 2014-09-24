@@ -1,0 +1,7 @@
+---
+- name: reload firewall
+  service: name=firewalld state=reloaded
+  sudo: yes
+
+- name: restart ntp
+  service: name=ntpd state=restarted

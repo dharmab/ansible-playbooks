@@ -1,0 +1,40 @@
+---
+- name: install 32-bit libraries
+  yum: name={{ item }}
+  with_items:
+    - glibc.i686
+    - libstdc++.i686
+
+- name: create steamcmd user
+  user: name=steam createhome=yes state=present
+
+- name: create steamcmd directory
+  file: path=/home/steam/steamcmd state=directory owner=steam group=users
+
+- name: check if steamcmd is installed
+  stat: path=/home/steam/steamcmd/steamcmd.sh
+  register: steamcmd
+
+- name: download steamcmd
+  sudo: yes
+  sudo_user: steam
+  get_url: url=http://media.steampowered.com/installer/steamcmd_linux.tar.gz dest=/home/steam/steamcmd/steamcmd_linux.tar.gz
+  when: steamcmd.stat.exists == false
+
+- name: extract steamcmd
+  sudo: yes
+  sudo_user: steam
+  unarchive: src=/home/steam/steamcmd/steamcmd_linux.tar.gz dest=/home/steam/steamcmd/ copy=no
+  when: steamcmd.stat.exists == false
+
+- name: attempt to log into steam
+  sudo: yes
+  sudo_user: steam
+  command: /home/steam/steamcmd/steamcmd.sh +login {{ steam_user_name }} {{ steam_user_password }} +quit
+  async: 60
+  poll: 5
+  register: steam_login
+
+- name: Stop if manual intervention required
+  fail: msg="You must manually authorize this server with Steam Guard before ansible can continue. Log into the server manually and run 'sudo -u steam /home/steam/steamcmd/steamcmd.sh +login <steam username>.'"
+  when: steam_login|failed
