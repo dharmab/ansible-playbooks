@@ -1,4 +1,4 @@
-arma_server_hostname: "ArmA 3 Server - Provisiioned by Ansible"
+arma_server_hostname: "ArmA 3 Server - Provisioned by Ansible"
 arma_server_password: ""
 arma_server_admin_password: "changeme"
 #arma_server_max_players: 10
