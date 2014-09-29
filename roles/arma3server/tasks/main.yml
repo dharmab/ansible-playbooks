@@ -1,4 +1,7 @@
 ---
+- name: Check if operating system is supported
+  assert: that="ansible_os_family == 'RedHat'"
+
 - name: create Arma profiles directory
   file: path="/home/steam/.local/share/{{ item }}" state=directory
   with_items:

@@ -1,0 +1,4 @@
+---
+- hosts: murmur
+  roles:
+    - murmur

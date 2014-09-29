@@ -1,29 +1,66 @@
 ---
-- name: ensure operating system is a Red Hat derivative
-  assert: that="ansible_os_family == 'RedHat'"
+- name: ensure operating system is supported 
+  assert: that="ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'"
 
+# Red Hat tasks
 - name: install EPEL bootstrap repository
   copy: src=epel-bootstrap.repo dest=/etc/yum.repos.d/
   sudo: yes
+  when: ansible_os_family == "RedHat"
 
 - name: install EPEL repository
   yum: name=epel-release enablerepo=epel-bootstrap
   sudo: yes
+  when: ansible_os_family == "RedHat"
 
 - name: enable EPEL repository
   ini_file: dest=/etc/yum.repos.d/epel.repo section=epel option=enabled value=1
+  sudo: yes
+  when: ansible_os_family == "RedHat"
 
 - name: update all packages
   yum: name=* state=latest
+  sudo: yes
+  when: ansible_os_family == "RedHat"
 
 - name: install ntp
   yum: name=ntp state=present
+  sudo: yes
+  when: ansible_os_family == "RedHat"
 
 - name: ensure ntp is enabled
   service: name=ntpd state=started enabled=yes
+  sudo: yes
+  when: ansible_os_family == "RedHat"
 
 - name: ensure sshd is enabled
   service: name=sshd state=started enabled=yes
+  sudo: yes
+  when: ansible_os_family == "RedHat"
 
 - name: ensure firewall is enabled
   service: name=firewalld state=started enabled=yes
+  sudo: yes
+  when: ansible_os_family == "RedHat"
+
+# Debian tasks
+- name: perform safe upgrade of all packages
+  apt: update_cache=yes upgrade=safe
+  sudo: yes
+  when: ansible_os_family == "Debian"
+
+- name: install ntp
+  apt: name=ntp
+  sudo: yes
+  when: ansible_os_family == "Debian"
+
+- name: ensure ntp is enabled
+  service: name=ntp state=started enabled=yes
+  sudo: yes
+  when: ansible_os_family == "Debian"
+
+- name: ensure sshd is enabled
+  service: name=ssh state=started enabled=yes
+  sudo: yes
+  when: ansible_os_family == "Debian"
+

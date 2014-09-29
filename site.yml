@@ -3,4 +3,5 @@
 - include: tf2server.yml
 - include: arma3server.yml
 - include: development.yml
+- include: murmur.yml
 
