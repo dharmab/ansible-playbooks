@@ -1,0 +1,4 @@
+---
+- hosts: teamspeak
+  roles:
+    - teamspeak

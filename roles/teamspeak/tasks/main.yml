@@ -1,0 +1,50 @@
+---
+- name: check if operating system is supported
+  assert: that="ansible_os_family == 'Debian'"
+
+- name: create teamspeak group
+  group: name=teamspeak
+  sudo: yes
+
+- name: create teamspeak user
+  user: name=teamspeak group=teamspeak
+  sudo: yes
+
+- name: create download directory
+  file: path=/home/teamspeak/Downloads state=directory owner=teamspeak group=users
+  sudo: yes
+
+- name: download TeamSpeak server
+  get_url: url="http://dl.4players.de/ts/releases/3.0.10.3/teamspeak3-server_linux-amd64-{{ teamspeak_version }}.tar.gz"  dest=/home/teamspeak/Downloads/teamspeak-server-{{ teamspeak_version }}.tar.gz
+  sudo: yes
+  sudo_user: teamspeak
+
+- name: create TeamSpeak directory
+  file: name=/home/teamspeak/teamspeak-server-{{ teamspeak_version }} state=directory owner=teamspeak group=users
+  sudo: yes
+
+- name: extract TeamSpeak
+  unarchive: copy=no src=/home/teamspeak/Downloads/teamspeak-server-{{ teamspeak_version }}.tar.gz dest=/home/teamspeak/teamspeak-server-{{ teamspeak_version }}/  creates=/home/teamspeak/teamspeak-server-{{ teamspeak_version }}/ts3server_linux_amd64/ts3server
+  sudo: yes
+  sudo_user: teamspeak
+  register: teamspeak_updated
+
+- name: stop teamspeak
+  service: name=teamspeak-server state=stopped
+  when: teamspeak_updated|changed
+
+- name: template initscript
+  template: src=teamspeak-server.sh dest=/etc/init.d/teamspeak-server owner=root group=root mode=0744
+  sudo: yes
+  notify: 
+    - restart teamspeak
+  register: teamspeak_initscript_modified
+
+- name: update initscipts
+  command: update-rc.d teamspeak-server defaults
+  sudo: yes
+  when: teamspeak_initscript_modified|changed
+
+- name: ensure TeamSpeak is enabled
+  service: name="teamspeak-server" state=started enabled=yes
+  sudo: yes
