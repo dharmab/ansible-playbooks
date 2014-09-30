@@ -31,7 +31,7 @@ case "$g_COMMAND" in
         ;;
     stop)
         echo "Stopping TeamSpeak 3 server..."
-        sudo -u "$g_USER" "$g_STARTSCRIPT" restart
+        sudo -u "$g_USER" "$g_STARTSCRIPT" stop
         exit "$?"
         ;;
     reload)
