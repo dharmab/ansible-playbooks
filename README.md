@@ -4,7 +4,9 @@ Using Windows? A Vagrantfile and provisioning script are included to create a vi
 
     vagrant up
     vagrant ssh
-    cd /ansible-playbooks
+    cd ansible-playbooks
+
+You can now run Ansible commands from within the VM while editing the playbook using your favorite Windows editor.
 
 # Roles
 
