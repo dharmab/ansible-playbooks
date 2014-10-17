@@ -1,5 +1,5 @@
 [Unit]
-Description=Syncthing
+Description=Pulse (formerly syncthing)
 Requires=network-online.target
 After=network-online.target time-sync.target
 
