@@ -17,58 +17,58 @@
   file: path=/root/Downloads state=directory owner=root group=root
 
 - name: download go
-  get_url: url=https://storage.googleapis.com/golang/go{{ syncthing_go_version }}.linux-amd64.tar.gz dest=/root/Downloads/go{{ syncthing_go_version }}.linux-amd64.tar.gz
+  get_url: url=https://storage.googleapis.com/golang/go{{ pulse_go_version }}.linux-amd64.tar.gz dest=/root/Downloads/go{{ pulse_go_version }}.linux-amd64.tar.gz
   register: go_download
   sudo: yes
 
 - name: extract go binaries
-  unarchive: copy=no src=/root/Downloads/go{{ syncthing_go_version }}.linux-amd64.tar.gz dest=/usr/local
+  unarchive: copy=no src=/root/Downloads/go{{ pulse_go_version }}.linux-amd64.tar.gz dest=/usr/local
   sudo: yes
   when: go_download|changed
 
 - name: add go binaries to path
   lineinfile: dest=/etc/profile line="export PATH=$PATH:/usr/local/go/bin"
 
-# Although syncthing runs as root, we need a non-root user to build the binary
-- name: create syncthing user
+# Although pulse runs as root, we need a non-root user to build the binary
+- name: create sync user
   user: name=sync createhome=yes
   sudo: yes
 
 # go is very particular about file locations
-- name: create syncthing directory
+- name: create sync directory
   file: path=/home/sync/src/github.com/syncthing state=directory owner=sync group=users
 
-- name: checkout syncthing sources
-  git: repo=https://github.com/syncthing/syncthing dest=/home/sync/src/github.com/syncthing/syncthing version={{ syncthing_version }}
+- name: checkout pulse sources
+  git: repo=https://github.com/syncthing/syncthing dest=/home/sync/src/github.com/syncthing/syncthing version={{ pulse_version }}
   sudo: yes
   sudo_user: sync
 
-- name: build syncthing
+- name: build pulse
   shell: PATH=$PATH:/usr/local/go/bin go run build.go chdir=/home/sync/src/github.com/syncthing/syncthing/
   sudo: yes
   sudo_user: sync
-  notify: restart syncthing
+  notify: restart pulse
 
-- name: copy syncthing systemd service unit
-  copy: src=syncthing.service dest=/usr/lib/systemd/system/syncthing.service
+- name: copy pulse systemd service unit
+  copy: src=pulse.service dest=/usr/lib/systemd/system/pulse.service
   sudo: yes
-  register: syncthing_service_unit
+  register: pulse
 
 - name: reload systemd daemons
   command: systemctl daemon-reload
   sudo: yes
-  when: syncthing_service_unit|changed
+  when: pulse|changed
 
-- name: enable syncthing daemon
-  service: name=syncthing state=started enabled=yes
+- name: enable pulse daemon
+  service: name=pulse state=started enabled=yes
   sudo: yes
 
-- name: configure syncthing
+- name: configure pulse
   template: src=config.xml dest=/root/.config/syncthing/config.xml
   sudo: yes
-  notify: restart syncthing
+  notify: restart pulse
 
-- name: redirect HTTP/HTTPS to syncthing web ui
+- name: redirect HTTP/HTTPS to pulse web ui
   firewalld: rich_rule='rule family="ipv4" forward-port port="{{ item }}" protocol="tcp" to-port="8080"' permanent=true state=enabled
   with_items:
     - 80
