@@ -29,6 +29,7 @@
 - name: add go binaries to path
   lineinfile: dest=/etc/profile line="export PATH=$PATH:/usr/local/go/bin"
 
+# Although syncthing runs as root, we need a non-root user to build the binary
 - name: create syncthing user
   user: name=sync createhome=yes
   sudo: yes
@@ -62,8 +63,10 @@
   service: name=syncthing state=started enabled=yes
   sudo: yes
 
-- name: enable remote access
-  lineinfile: dest=/home/sync/.config/syncthing/config.xml line=<address>0.0.0.0:8080</address> regexp="\s*<address>.*</address>"
+- name: configure syncthing
+  copy: src=config.xml dest=/root/.config/syncthing/config.xml
+  sudo: yes
+  notify: restart syncthing
 
 - name: open firewall ports
   firewalld: port={{ item }} permanent=true state=enabled
