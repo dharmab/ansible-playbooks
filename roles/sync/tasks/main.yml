@@ -1,0 +1,86 @@
+---
+- name: ensure operating system is supported
+  assert: that="ansible_os_family == 'RedHat'"
+
+- name: install dependencies
+  yum: name={{ item }}
+  with_items:
+    - git
+    - mercurial
+  sudo: yes
+
+- name: ensure centos go package is not installed
+  yum: name=golang state=absent
+  sudo: yes
+
+- name: create downloads folder
+  file: path=/root/Downloads state=directory owner=root group=root
+
+- name: download go
+  get_url: url=https://storage.googleapis.com/golang/go{{ pulse_go_version }}.linux-amd64.tar.gz dest=/root/Downloads/go{{ pulse_go_version }}.linux-amd64.tar.gz
+  register: go_download
+  sudo: yes
+
+- name: extract go binaries
+  unarchive: copy=no src=/root/Downloads/go{{ pulse_go_version }}.linux-amd64.tar.gz dest=/usr/local
+  sudo: yes
+  when: go_download|changed
+
+- name: add go binaries to path
+  lineinfile: dest=/etc/profile line="export PATH=$PATH:/usr/local/go/bin"
+
+# Although pulse runs as root, we need a non-root user to build the binary
+- name: create sync user
+  user: name=sync createhome=yes
+  sudo: yes
+
+# go is very particular about file locations
+- name: create sync directory
+  file: path=/home/sync/src/github.com/syncthing state=directory owner=sync group=users
+
+- name: checkout pulse sources
+  git: repo=https://github.com/syncthing/syncthing dest=/home/sync/src/github.com/syncthing/syncthing version={{ pulse_version }}
+  sudo: yes
+  sudo_user: sync
+
+- name: build pulse
+  shell: PATH=$PATH:/usr/local/go/bin go run build.go chdir=/home/sync/src/github.com/syncthing/syncthing/
+  sudo: yes
+  sudo_user: sync
+  notify: restart pulse
+
+- name: copy pulse systemd service unit
+  copy: src=pulse.service dest=/usr/lib/systemd/system/pulse.service
+  sudo: yes
+  register: pulse
+
+- name: reload systemd daemons
+  command: systemctl daemon-reload
+  sudo: yes
+  when: pulse|changed
+
+- name: enable pulse daemon
+  service: name=pulse state=started enabled=yes
+  sudo: yes
+
+- name: configure pulse
+  template: src=config.xml dest=/root/.config/syncthing/config.xml
+  sudo: yes
+  notify: restart pulse
+
+- name: redirect HTTP/HTTPS to pulse web ui
+  firewalld: rich_rule='rule family="ipv4" forward-port port="{{ item }}" protocol="tcp" to-port="8080"' permanent=true state=enabled
+  with_items:
+    - 80
+    - 443
+  sudo: yes
+
+- name: open firewall ports
+  firewalld: port={{ item }} permanent=true state=enabled
+  with_items:
+    - 80/tcp
+    - 443/tcp
+    - 8080/tcp # web ui
+    - 22000/tcp # listen
+  sudo: yes
+  notify: reload firewall

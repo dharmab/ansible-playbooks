@@ -35,3 +35,14 @@ Provisions a server as a Murmur server for the Mumble VoIP program.
 1. Copy `host_vars/murmur_example` to `host_vars/<hostname>` and edit the variables accordinly. While host variables are normally considered a bad practice, they make sense for Murmur servers where each host is a self-contained instance.
 1. Run `ansible-playbook -i inventory -u <remote user> site.yml`
 1. After the playbook is complete, log into the server as SuperUser using the superuser password from defined in the host_vars file.
+
+
+## Pulse/Syncthing
+Supported OS: Centos 7.0 x64
+
+Provisions a server as a secured Pulse node.
+
+1. Create an inventory file and add the server to the `sync` group.
+1. Edit `pulse_credentials.json` with the desired web UI username and password.
+1. Run `ansible-playbook -i inventory -u <remote user> --extra-vars="@pulse_credentials.sjon" site.yml
+1. After the playbook is complete, login into the server on port 8080.

@@ -1,0 +1,12 @@
+[Unit]
+Description=Pulse (formerly syncthing)
+Requires=network-online.target
+After=network-online.target time-sync.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/home/sync/src/github.com/syncthing/syncthing/bin/syncthing
+
+[Install]
+WantedBy=multi-user.target
