@@ -64,13 +64,22 @@
   sudo: yes
 
 - name: configure syncthing
-  copy: src=config.xml dest=/root/.config/syncthing/config.xml
+  template: src=config.xml dest=/root/.config/syncthing/config.xml
   sudo: yes
   notify: restart syncthing
+
+- name: redirect HTTP/HTTPS to syncthing web ui
+  firewalld: rich_rule='rule family="ipv4" forward-port port="{{ item }}" protocol="tcp" to-port="8080"' permanent=true state=enabled
+  with_items:
+    - 80
+    - 443
+  sudo: yes
 
 - name: open firewall ports
   firewalld: port={{ item }} permanent=true state=enabled
   with_items:
+    - 80/tcp
+    - 443/tcp
     - 8080/tcp # web ui
     - 22000/tcp # listen
   sudo: yes
