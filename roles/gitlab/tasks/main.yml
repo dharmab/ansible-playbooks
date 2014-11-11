@@ -30,7 +30,7 @@
   sudo: yes
   when: gitlab_rb|changed
 
-- name: open firewall portsA
+- name: open firewall ports
   firewalld: port={{ item }} permanent=true state=enabled
   with_items:
     - 22/tcp
@@ -38,3 +38,7 @@
     - 443/tcp
   sudo: yes
   notify: reload firewall
+
+- name: start gitlab
+  command: gitlab-ctl start
+  sudo: yes
