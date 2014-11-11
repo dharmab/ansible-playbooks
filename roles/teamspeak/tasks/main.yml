@@ -29,10 +29,6 @@
   sudo_user: teamspeak
   register: teamspeak_updated
 
-- name: stop teamspeak
-  service: name=teamspeak-server state=stopped
-  when: teamspeak_updated|changed
-
 - name: template initscript
   template: src=teamspeak-server.sh dest=/etc/init.d/teamspeak-server owner=root group=root mode=0744
   sudo: yes
