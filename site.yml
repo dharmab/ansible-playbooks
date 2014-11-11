@@ -5,4 +5,5 @@
 - include: development.yml
 - include: murmur.yml
 - include: sync.yml
+- include: teamspeak.yml
 
