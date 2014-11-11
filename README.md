@@ -44,5 +44,5 @@ Provisions a server as a secured Pulse node.
 
 1. Create an inventory file and add the server to the `sync` group.
 1. Edit `pulse_credentials.json` with the desired web UI username and password.
-1. Run `ansible-playbook -i inventory -u <remote user> --extra-vars="@pulse_credentials.sjon" site.yml
+1. Run `ansible-playbook -i inventory -u <remote user> --extra-vars="@pulse_credentials.json" site.yml`
 1. After the playbook is complete, login into the server on port 8080.
