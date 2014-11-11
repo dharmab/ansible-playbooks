@@ -1,4 +1,4 @@
 ---
-hosts: gitlab
-roles:
-  - gitlab
+- hosts: gitlab
+  roles:
+    - gitlab
