@@ -6,4 +6,4 @@
 - include: murmur.yml
 - include: sync.yml
 - include: teamspeak.yml
-
+- include: gitlab.yml

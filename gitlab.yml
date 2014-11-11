@@ -1,0 +1,4 @@
+---
+hosts: gitlab
+roles:
+  - gitlab

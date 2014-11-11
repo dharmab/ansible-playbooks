@@ -1,0 +1,34 @@
+---
+- name: ensure operating system is supported
+  assert: that="ansible_os_family == 'RedHat'" 
+
+- name: install dependencies:
+  yum: name={{ item }}
+  with_items:
+    - openssh-server
+    - postfix
+  sudo: yes
+
+- name: enable dependencies:
+  service: name={{ item }} state=running enabled=yes
+  with_items:
+    - sshd
+    - postfix
+  sudo: yes
+
+- name: install gitlab
+  yum: name={{ gitlab_omnibus_package_url }}
+  sudo: yes
+
+- name: configure gitlab
+  command: gitlab-ctl reconfigure
+  sudo: yes
+
+- name: open firewall portsA
+  firewalld: port={{ item }} permanent=true state=enabled
+  with_items:
+    - 22/tcp
+    - 80/tcp
+    - 443/tcp
+  sudo: yes
+  notify: reload firewall
