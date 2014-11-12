@@ -1,0 +1,18 @@
+---
+- name: ensure operating system is supported
+  assert: that="ansible_os_family == 'RedHat'"
+
+- name: install gitolite
+  yum: name=gitolite3
+  sudo: yes
+
+- name: install git-annex
+  yum: name=git-annex
+  sudo: yes
+
+- name: create git user
+  user: name=git createhome=yes
+  sudo: yes
+
+- name: display further instructions
+  debug: "Copy ssh public key(s) to host, then run `sudo -u git -H gitolite setup -pk yourname.pub` to enable access. Due to limitations of SSH, the gitolite key must be different from any system keys."

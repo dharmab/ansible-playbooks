@@ -1,0 +1,5 @@
+---
+- hosts: git-annex
+  roles:
+    - git-annex
+

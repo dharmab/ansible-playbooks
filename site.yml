@@ -7,3 +7,4 @@
 - include: sync.yml
 - include: teamspeak.yml
 - include: gitlab.yml
+- include: git-annex.yml
