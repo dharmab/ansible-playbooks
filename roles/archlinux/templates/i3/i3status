@@ -12,14 +12,15 @@ cpu_temperature 0 {
     format = "CPU: %degrees °C"
 }
 
-ethernet enp3s0 {
+{% for device in ansible_devices %}
+{% if device.type = "ether"}
+ethernet {{ device.device }} {
     format_up = "Ethernet: %ip (%speed)"
-        format_down = "Ethernet: down"
+    format_down = "Ethernet: down"
 }
-
-wireless wlp3s0 {
-    format_up "%essid: %ip (%speed|%quality)"
-}
+order += "ethernet {{ device.device }}"
+{% endif %}
+{% endfor %}
 
 tztime local {
     format = "%Y-%m-%d %H:%M:%S"
