@@ -114,7 +114,7 @@
     - git
     - subversion
     # Editors
-    - vim
+    - gvim
     # Other tools
     - openssh
     - virtualbox

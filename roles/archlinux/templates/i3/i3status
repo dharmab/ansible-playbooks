@@ -1,31 +1,32 @@
 general {
-	colors = true
-	interval = 1
+    colors = true
+        interval = 1
 }
 
 order += "cpu_temperature 0"
-#order += "ethernet enp3s0"
 order += "tztime local"
+#order += "wireless wlp3s0"
+#order += "ethernet enp3s0"
 
 cpu_temperature 0 {
-	format = "CPU: %degrees °C"
+    format = "CPU: %degrees °C"
 }
 
-#ethernet enp3s0 {
-#	format_up = "Ethernet: %ip (%speed)"
-#	format_down = "Ethernet: down"
-#}
+ethernet enp3s0 {
+    format_up = "Ethernet: %ip (%speed)"
+        format_down = "Ethernet: down"
+}
 
-#wireless wlp3s0 {
-#	format_up "%essid: %ip (%speed|%quality)"
-#}
+wireless wlp3s0 {
+    format_up "%essid: %ip (%speed|%quality)"
+}
 
 tztime local {
-	format = "%Y-%m-%d %H:%M:%S"
+    format = "%Y-%m-%d %H:%M:%S"
 }
 
-#battery 0 {
-#	format = "Battery: %charging (%percentage)"
-#	path = "sys/class/power_supply/BAT%d/uevent"
-#	low_threshold = 15
-#}
+battery 0 {
+    format = "Battery: %charging (%percentage)"
+        path = "sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 15
+}
