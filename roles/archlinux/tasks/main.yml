@@ -57,6 +57,7 @@
     - arandr
     - elementary-icon-theme
     - xcursor-simpleandsoft
+    - feh
   sudo: yes
 
 - name: enable GUI on boot
