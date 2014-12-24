@@ -15,8 +15,16 @@ cpu_temperature 0 {
 {% if interface|truncate(1, True, "") == "e" %}
 order += "ethernet {{ interface }}"
 ethernet {{ interface }} {
-    format_up = "Ethernet: %ip (%speed)"
-    format_down = "Ethernet: down"
+    format_up = "LAN: %ip (%speed)"
+    format_down = "LAN: disconnected"
+}
+{% endif %}
+
+{% if interface|truncate(1, True, "") == "w" %}
+order += "wireless {{ interface }}"
+wireless {{ interface }} {
+    format_up = "WLAN: %ip (%essid, %quality, %bitrate)"
+    format_down = "WLAN: disconnected"
 }
 {% endif %}
 
