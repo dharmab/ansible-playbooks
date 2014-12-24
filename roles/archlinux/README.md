@@ -6,12 +6,14 @@ Wallpaper image credits:
 * Mass Effect copyright EA International (Studio and Publishing) Ltd
 
 ## Usage
+Before running the playbook, perform a full upgrade and resolve any necessary manual interventions. This playbook must be run as root. Although I have tested the playbook and have found no destructive side effects, I cannot guarantee your system. Make sure your backups are current.
+
 Create an inventory file named `localhost` with the following content
 
     [archlinux]
     localhost
 
-Become the root user and run the following:
+Become the root user and run the playbook:
 ```bash
 pacman -Syu ansible
 ansible-playbook -i localhost -c local --extra-vars "ansible_python_interpreter=/usr/bin/python2 normal_user=john user_real_name='John Doe' user_email=john.doe@example.com" site.yml
