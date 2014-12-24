@@ -63,6 +63,16 @@
   service: name=lightdm enabled=yes
   sudo: yes
 
+- name: copy wallpaper image
+  copy: src=korra_masseffect_wallpaper.png dest=/home/{{ normal_user }}/.wallpaper owner={{ normal_user }} group=users
+  sudo: yes
+  sudo_user: "{{ normal_user }}"
+
+- name: template feh wallpaper script
+  template: src=fehbg dest=/home/{{ normal_user }}/.fehbg owner={{ normal_user }} group=users
+  sudo: yes
+  sudo_user: "{{ normal_user }}"
+
 - name: template i3 configuration
   template: src=i3/config dest=/home/{{ normal_user }}/.i3/config owner={{ normal_user }} group=users
   sudo: yes

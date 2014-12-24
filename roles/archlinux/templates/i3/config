@@ -160,8 +160,11 @@ bindsym $mod+b exec "i3lock -c 000000"
 # finds out, if available)
 bar {
     mode hide
-        colors {
-            active_workspace #333333 #222222 #ffffff
-        }
+    colors {
+        active_workspace #333333 #222222 #ffffff
+    }
     status_command i3status --config ~/.i3/i3status
 }
+
+# Set the wallpaper using feh
+exec /usr/bin/sh /home/{{ normal_user }}/.fehbg &
