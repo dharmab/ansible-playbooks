@@ -50,7 +50,11 @@ set exrc
 set secure
 
 " Color scheme
-colorscheme base16-monokai
+try
+    colorscheme base16-monokai
+catch
+    colorscheme desert
+endtry
 set background=dark
 syntax on
 

@@ -1,4 +1,0 @@
----
-- hosts: development
-  roles:
-    - development

@@ -2,9 +2,8 @@
 - include: csgoserver.yml
 - include: tf2server.yml
 - include: arma3server.yml
-- include: development.yml
+- include: archlinux.yml
 - include: murmur.yml
-- include: sync.yml
 - include: teamspeak.yml
 - include: gitlab.yml
 - include: git-annex.yml
