@@ -1,3 +1,0 @@
----
-- name: restart pulse
-  service: name=pulse state=restarted
