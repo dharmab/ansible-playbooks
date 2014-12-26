@@ -168,3 +168,6 @@ bar {
 
 # Set the wallpaper using feh
 exec /usr/bin/sh /home/{{ normal_user }}/.fehbg &
+
+# Ensure pulseaudio starts (workaround for Fiio E7 USB DAC)
+exec /usr/bin/pulseaudio --start
