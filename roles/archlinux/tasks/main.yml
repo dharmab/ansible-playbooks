@@ -143,6 +143,15 @@
     - openssh
     - virtualbox
     - vagrant
+    
+- name: configure virtualbox kernel modules
+  template: src=virtualbox.conf dest=/etc/modules-load.d/virtualbox.conf
+  sudo: yes
+
+- name: install vagrant vbguest plugin
+  command: "/usr/bin/vagrant plugin install vagrant-vbguest"
+  sudo: yes
+  sudo_user: "{{ normal_user }}"
 
 - name: configure git name
   command: "/usr/bin/git config --global user.name \"{{ user_real_name }}\""
@@ -159,7 +168,6 @@
   sudo: yes
   sudo_user: "{{ normal_user }}"
 
-# Vim
 - name: create .vimrc directory
   file: path="/home/{{ normal_user }}/.vim/bundle" owner={{ normal_user }} group=users state=directory
   sudo: yes
@@ -176,7 +184,7 @@
   sudo_user: "{{ normal_user }}"
 
 - name: install Vundle plugins
-  command: /usr/bin/vim +PluginInstall +qall
+  command: "/usr/bin/vim +PluginInstall +qall!"
   sudo: yes
   sudo_user: "{{ normal_user }}"
 
