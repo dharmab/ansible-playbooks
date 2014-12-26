@@ -5,10 +5,17 @@ Wallpaper image credits:
 * Legend of Korra copyright Viacom International Inc
 * Mass Effect copyright EA International (Studio and Publishing) Ltd
 
-## Usage
+## Variables
+
+* `normal_user` (string) - The username of the non-root user this role will create and configure
+* `user_real_name` (string) - The non-root user's real name (used for git commits)
+* `user_email` (string) - The non-root user's email address (used for git commits)
+
+## Usage Notes
+
 Before running the playbook, perform a full upgrade and resolve any necessary manual interventions. This playbook must be run as root. Although I have tested the playbook and have found no destructive side effects, I cannot guarantee your system. Make sure your backups are current.
 
-Create an inventory file named `localhost` with the following content
+To run this role locally, create an inventory file named `localhost` with the following content
 
     [archlinux]
     localhost
@@ -19,4 +26,11 @@ pacman -Syu ansible
 ansible-playbook -i localhost -c local --extra-vars "ansible_python_interpreter=/usr/bin/python2 normal_user=john user_real_name='John Doe' user_email=john.doe@example.com" site.yml
 ```
 
-Where `normal_user` is the username of the non-root user that will be created, `user_real_name` is the real name used for git commits and `user_email` is the email address used for git commits.` You will have to set the non-root user's password and sudo privileges manually.
+You will have to set the non-root user's password and sudo privileges manually using `passwd` and `visudo`. Enabling sudo access for the `wheel` group should suffice, e.g. `%wheel ALL=(ALL) ALL`.
+
+This role does not manage any AUR packages. You will have to install and manage them yourself. I recommend the following AUR packages:
+
+* An AUR helper, such as `pacaur`, `packer` or `aura`
+* `powerline-fonts-fit` to enable powerline symbols in Vim
+* Either `chromium-pepper-flash` or `google-chrome` if Flash support is necessary
+* `google-talkplugin` if Google Hangouts support is necessary
