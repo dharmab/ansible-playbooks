@@ -17,9 +17,10 @@ Provisions a server as an ArmA 3 Dedicated server.
 * `arma_server_voice_quality` (int in range 0-30 inclusive) - If in-game voice chat is enabled, this setting determines the audio quality. 0 is the lowest quality and 30 is the highest quality.
 
 ## Usage Notes
-The playbook will stop after installing SteamCMD and ask you to authorize the server with Steam Guard. Follow the instructions to verify the account and run the playbook again.
+You will need to manually authorize each server with Steam Guard. This step cannot be automated and will interupt the playbook.
 
 You will need to use screen or tmux to daemonize the server process:
+
 1. Start a screen or tmux session.
 1. Navigate to the ArmA 3 server directory with `cd /home/steam/arma3`.
 1. Start the server with `sudo -u steam ./arma3server -name=server -config=server.cfg`
