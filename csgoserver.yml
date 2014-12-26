@@ -1,4 +1,0 @@
----
-- hosts: csgo
-  roles:
-  - csgoserver

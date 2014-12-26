@@ -1,9 +1,32 @@
 ---
-- include: csgoserver.yml
-- include: tf2server.yml
-- include: arma3server.yml
-- include: archlinux.yml
-- include: murmur.yml
-- include: teamspeak.yml
-- include: gitlab.yml
-- include: git-annex.yml
+- hosts: archlinux
+  roles:
+  - archlinux
+
+- hosts: arma3
+  roles:
+  - arma3server
+
+- hosts: csgo
+  roles:
+  - csgoserver
+
+- hosts: git-annex
+  roles:
+  - git-annex
+
+- hosts: gitlab
+  roles:
+  - gitlab
+
+- hosts: murmur
+  roles:
+  - murmur
+
+- hosts: teamspeak
+  roles:
+  - teamspeak
+
+- hosts: tf2
+  roles:
+  - tf2server
