@@ -177,6 +177,6 @@
   sudo_user: "{{ normal_user }}"
 
 - name: install YouCompleteMe
-  command: "/home/{{ normal_user }}/.vim/bundle/YouCompleteMe/install.sh --clang-completer"
+  command: "/home/{{ normal_user }}/.vim/bundle/YouCompleteMe/install.sh"
   sudo: yes
   sudo_user: "{{ normal_user }}"
