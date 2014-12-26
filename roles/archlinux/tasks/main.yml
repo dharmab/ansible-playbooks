@@ -120,7 +120,11 @@
     - base-devel
     - cmake
     - premake
+    - gdb
+    - valgrind
     # Python
+    - python2
+    - python2-pip
     - python
     - python-pip
     # Ruby
