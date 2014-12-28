@@ -19,16 +19,20 @@
 - name: install gitlab
   yum: name={{ gitlab_omnibus_package_url }}
   sudo: yes
+  register: gitlab
+  notify: restart gitlab
 
 - name: template gitlab.rb
   template: src=gitlab.rb dest=/etc/gitlab/gitlab.rb
   sudo: yes
   register: gitlab_rb
+  notify: restart gitlab
 
 - name: configure gitlab
   command: gitlab-ctl reconfigure
   sudo: yes
-  when: gitlab_rb|changed
+  when: gitlab|changed or gitlab_rb|changed
+  notify: restart gitlab
 
 - name: open firewall ports
   firewalld: port={{ item }} permanent=true state=enabled
