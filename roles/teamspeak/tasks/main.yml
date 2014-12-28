@@ -15,7 +15,7 @@
   sudo: yes
 
 - name: download TeamSpeak server
-  get_url: url="http://dl.4players.de/ts/releases/3.0.10.3/teamspeak3-server_linux-amd64-{{ teamspeak_version }}.tar.gz"  dest=/home/teamspeak/Downloads/teamspeak-server-{{ teamspeak_version }}.tar.gz
+  get_url: url="http://dl.4players.de/ts/releases/{{ teamspeak_version }}/teamspeak3-server_linux-amd64-{{ teamspeak_version }}.tar.gz"  dest=/home/teamspeak/Downloads/teamspeak-server-{{ teamspeak_version }}.tar.gz
   sudo: yes
   sudo_user: teamspeak
 
@@ -35,6 +35,11 @@
   notify: 
     - restart teamspeak
   register: teamspeak_initscript_modified
+
+- name: stop teamspeak
+  service: name=teamspeak3 state=stopped
+  sudo: yes
+  when: teamspeak_initscript_modified|changed
 
 - name: update initscipts
   command: update-rc.d teamspeak-server defaults
