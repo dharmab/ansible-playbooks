@@ -153,7 +153,7 @@
     - fuse
     - gtkmm
     - linux-headers
-  when: install_vmware|true
+  when: install_vmware|bool
   sudo: yes
 
 - name: template vmware systemd service
@@ -167,7 +167,7 @@
 
 - name: install vagrant vmware plugin (license required)
   command: /usr/bin/vagrant plugin install vagrant-vmware-workstation
-  when: install_vmware|true
+  when: install_vmware|bool
   sudo: yes
   sudo_user: "{{ normal_user }}"
 
@@ -228,9 +228,9 @@
     - git-annex-bin
     - gtk-theme-boje # a nice dark theme
   sudo: yes
-  sudo_user: {{ normal_user }}
+  sudo_user: "{{ normal_user }}"
 
 - name: vmware instructions
   debug: msg="Install VMWare Workstation manually with '/usr/bin/sh <vmware installer> --eulas-agreed --required --console'"
-  when: install_vmware|true
+  when: install_vmware|bool
 
