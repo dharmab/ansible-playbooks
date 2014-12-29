@@ -20,17 +20,16 @@ To run this role locally, create an inventory file named `localhost` with the fo
     [archlinux]
     localhost
 
+Install Ansible:
+```bash
+pacman -S ansible
+```
+
+Install [Packer](https://aur.archlinux.org/packages/packer/) from the AUR.
+
 Become the root user and run the playbook:
 ```bash
-pacman -Syu ansible
 ansible-playbook -i localhost -c local --extra-vars "ansible_python_interpreter=/usr/bin/python2 normal_user=john user_real_name='John Doe' user_email=john.doe@example.com" site.yml
 ```
 
 You will have to set the non-root user's password and sudo privileges manually using `passwd` and `visudo`. Enabling sudo access for the `wheel` group should suffice, e.g. `%wheel ALL=(ALL) ALL`.
-
-This role does not manage any AUR packages. You will have to install and manage them yourself. I recommend the following AUR packages:
-
-* An AUR helper, such as `pacaur`, `packer` or `aura`
-* `powerline-fonts-fit` to enable powerline symbols in Vim
-* Either `chromium-pepper-flash` or `google-chrome` if Flash support is necessary
-* `google-talkplugin` if Google Hangouts support is necessary

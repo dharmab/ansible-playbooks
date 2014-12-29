@@ -104,7 +104,6 @@
   with_items:
     - xterm
     - pcmanfm
-    - chromium
     - evince
     - gimp
     - viewnior
@@ -192,3 +191,21 @@
   command: "/home/{{ normal_user }}/.vim/bundle/YouCompleteMe/install.sh"
   sudo: yes
   sudo_user: "{{ normal_user }}"
+
+- name: ensure chromium is not installed
+  pacman: name=chromium state=absent recurse=yes
+  sudo: yes
+
+- name: install AUR packages
+  packer: name={{ item }}
+  with_items:
+    - packer # ensure packer is up to date
+    - powerline-fonts-git # used by vim-powerline
+    - google-chrome
+    - google-talkplugin
+    - intellij-idea-community-edition
+    - sublime-text-dev
+    - git-annex-bin
+    - gtk-theme-boje # a nice dark theme
+  sudo: yes
+  sudo_user: {{ normal_user }}
