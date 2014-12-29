@@ -10,6 +10,7 @@ Wallpaper image credits:
 * `normal_user` (string) - The username of the non-root user this role will create and configure
 * `user_real_name` (string) - The non-root user's real name (used for git commits)
 * `user_email` (string) - The non-root user's email address (used for git commits)
+* `install_vmware` (boolean) - If true, VMware Workstation dependencies and configuration files will be installed. If false, these will not be installed. Workstation itself must be installed and and enabled manually (see usage notes)
 
 ## Usage Notes
 
@@ -27,6 +28,14 @@ ansible-playbook -i localhost -c local --extra-vars "ansible_python_interpreter=
 ```
 
 You will have to set the non-root user's password and sudo privileges manually using `passwd` and `visudo`. Enabling sudo access for the `wheel` group should suffice, e.g. `%wheel ALL=(ALL) ALL`.
+
+To install VMware Workstation, run the playbook with `install_vmware` set to true, then run the following:
+
+```bash
+sh <vmware installer file> --console --eulas-agreed --required
+systemctl start vmware
+systemctl enable vmware
+```
 
 This role does not manage any AUR packages. You will have to install and manage them yourself. I recommend the following AUR packages:
 

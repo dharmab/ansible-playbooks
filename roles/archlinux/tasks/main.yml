@@ -148,8 +148,27 @@
   template: src=virtualbox.conf dest=/etc/modules-load.d/virtualbox.conf
   sudo: yes
 
+- name: install vmware workstation dependencies
+  pacman: name={{ item }}
+  with_items:
+    - fuse
+    - gtkmm
+    - linux-headers
+  when: install_vmware|true
+  sudo: yes
+
+- name: template vmware systemd service
+  template: src=vmware.service dest=/etc/systemd/system/vmware.service
+  sudo: yes
+
 - name: install vagrant vbguest plugin
   command: "/usr/bin/vagrant plugin install vagrant-vbguest"
+  sudo: yes
+  sudo_user: "{{ normal_user }}"
+
+- name: install vagrant vmware plugin (license required)
+  command: /usr/bin/vagrant plugin install vagrant-vmware-workstation
+  when: install_vmware|true
   sudo: yes
   sudo_user: "{{ normal_user }}"
 
@@ -192,3 +211,7 @@
   command: "/home/{{ normal_user }}/.vim/bundle/YouCompleteMe/install.sh"
   sudo: yes
   sudo_user: "{{ normal_user }}"
+
+- name: vmware instructions
+  debug: msg="Install VMWare Workstation manually with /usr/bin/sh <vmware installer> --eulas-agreed --required --console"
+  when: install_vmware|true
