@@ -51,19 +51,20 @@ burniso() {
 
 # Shortcuts for Ansible playbook best practices
 ansible-init() {
-touch site.yml
-mkdir -p group_vars host_vars
+    touch site.yml
+    mkdir -p group_vars host_vars
 }
 
 ansible-add-role() {
-touch ${1}.yml
-mkdir -p roles/${1}/{tasks,handlers,templates,files,vars,meta}
-touch roles/${1}/{tasks,handlers,vars,meta}/main.yml
+    touch ${1}.yml
+    mkdir -p roles/${1}/{tasks,handlers,templates,files,vars,meta}
+    touch roles/${1}/{tasks,handlers,vars,meta}/main.yml
 }
 
 # Set prompt
 bash_prompt() {
-    local COLOR_NONE="\[\033[0m\]"	# unsets color to term's fg color
+    # unset color to term's fg color
+    local COLOR_NONE="\[\033[0m\]" 
 
     # regular colors
     local COLOR_BLACK="\[\033[0;30m\]"
