@@ -1,1 +1,1 @@
-feh  --bg-fill '/home/dharmab/.wallpaper' 
+feh  --bg-fill '/home/{{ normal_user }}/.wallpaper' 
