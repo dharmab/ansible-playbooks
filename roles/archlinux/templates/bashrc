@@ -6,14 +6,28 @@ export EDITOR=vim
 # Set Java Swing UI Look and Feel to GTK, and nicer font antialiasing
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
+# Determine if a command is available
+present() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: present <command>"
+    else
+        type "$1" >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            return 0
+        else
+            return 1
+        fi
+    fi
+}
+
 # Set Maven home
-type mvn >/dev/null 2>&1
+present mvn
 if [ $? -eq 0 ]; then
     export M2_HOME=/opt/maven
 fi
 
 # Install and run ruby gems in home directory
-type ruby >/dev/null 2>&1
+present ruby
 if [ $? -eq 0 ]; then
     export GEM_HOME="$(ruby -rubygems -e "puts Gem.user_dir")"
     export PATH="$GEM_HOME/bin:$PATH"
