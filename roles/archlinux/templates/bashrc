@@ -10,13 +10,14 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswi
 present() {
     if [ "$#" -ne 1 ]; then
         echo "Usage: present <command>"
+    fi
+
+    type "$1" >/dev/null 2>&1
+    
+    if [ $? -eq 0 ]; then
+        return 0
     else
-        type "$1" >/dev/null 2>&1
-        if [ $? -eq 0 ]; then
-            return 0
-        else
-            return 1
-        fi
+        return 1
     fi
 }
 
@@ -51,7 +52,12 @@ alias ..='cd ..'
 
 # Shortcut to get the disk size of a directory and contents
 sizeof() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: sizeof <directory>"
+        return
+    fi
     du -ch "$1" | grep total
+    return 0
 }
 
 # Shortcut to burn an ISO - edit with correct utility, syntax and device
@@ -59,7 +65,7 @@ burniso() {
     if [ -f "$1" ]; then
         cdrecord -v -sao dev=/dev/cdrom "$1"
     else
-        echo "bash: burniso: '$1': File not found"
+        echo "burniso: '$1': File not found"
     fi
 }
 
@@ -70,6 +76,9 @@ ansible-init() {
 }
 
 ansible-add-role() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: ansible-add-role <name>"
+    fi
     touch ${1}.yml
     mkdir -p roles/${1}/{tasks,handlers,templates,files,vars,meta}
     touch roles/${1}/{tasks,handlers,vars,meta}/main.yml
