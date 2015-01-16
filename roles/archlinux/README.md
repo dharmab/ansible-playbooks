@@ -30,7 +30,7 @@ Install [Packer](https://aur.archlinux.org/packages/packer/) from the AUR.
 
 Become the root user and run the playbook:
 ```bash
-ansible-playbook -i localhost -c local --extra-vars "ansible_python_interpreter=/usr/bin/python2 normal_user=john user_real_name='John Doe' user_email=john.doe@example.com" site.yml
+ansible-playbook -i localhost -c local --extra-vars "normal_user=john user_real_name='John Doe' user_email=john.doe@example.com" site.yml
 ```
 
 You will have to set the non-root user's password and sudo privileges manually using `passwd` and `visudo`. Enabling sudo access for the `wheel` group should suffice, e.g. `%wheel ALL=(ALL) ALL`.

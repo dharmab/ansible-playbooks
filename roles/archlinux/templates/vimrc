@@ -41,6 +41,9 @@ Plugin 'chase/vim-ansible-yaml'
 " Automatically close parentheses, etc.
 Plugin 'Raimondi/delimitMate'
 
+" Hotkeys for commenting/uncommenting
+Plugin 'tpope/vim-commentary'
+
 call vundle#end()
 filetype plugin indent on
 " END VUNDLE CONFIG
