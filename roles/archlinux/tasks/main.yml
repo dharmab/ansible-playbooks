@@ -108,7 +108,6 @@
     - gimp
     - viewnior
     - libreoffice-still
-    - libreoffice-still-en-US
     - vlc
   sudo: yes
 
