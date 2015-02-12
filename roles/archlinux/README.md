@@ -10,7 +10,7 @@ Wallpaper image credits:
 * `normal_user` (string) - The username of the non-root user this role will create and configure
 * `user_real_name` (string) - The non-root user's real name (used for git commits)
 * `user_email` (string) - The non-root user's email address (used for git commits)
-* `install_vmware` (boolean) - If true, VMware Workstation dependencies and configuration files will be installed. If false, these will not be installed. Workstation itself must be installed and and enabled manually (see usage notes)
+* `install_vmware` (boolean) - If true, VMware Workstation dependencies and configuration files will be installed. If false, these will not be installed. Workstation itself must be installed and enabled manually (see usage notes)
 
 ## Usage Notes
 
