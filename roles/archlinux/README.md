@@ -7,10 +7,10 @@ Wallpaper image credits:
 
 ## Variables
 
-* `normal_user` (string) - The username of the non-root user this role will create and configure
-* `user_real_name` (string) - The non-root user's real name (used for git commits)
-* `user_email` (string) - The non-root user's email address (used for git commits)
-* `install_vmware` (boolean) - If true, VMware Workstation dependencies and configuration files will be installed. If false, these will not be installed. Workstation itself must be installed and enabled manually (see usage notes)
+* `archlinux.username` (string) - The username of the non-root user this role will create and configure
+* `archlinux.git.name` (string) - The non-root user's real name (used for git commits)
+* `archlinux.git.email` (string) - The non-root user's email address (used for git commits)
+* `archlinux.vmware` (boolean) - If true, VMware Workstation dependencies and configuration files will be installed. If false, these will not be installed. Workstation itself must be installed and enabled manually (see usage notes)
 
 ## Usage Notes
 

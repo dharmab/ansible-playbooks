@@ -15,8 +15,8 @@
   command: /usr/bin/pacman -Su --noconfirm
   sudo: yes
 
-- name: create normal_user
-  user: name={{ normal_user }} createhome=yes group=users groups=wheel
+- name: create normal user
+  user: name={{ archlinux.username }} createhome=yes group=users groups=wheel
   sudo: yes
 
 - name: install utilities
@@ -65,29 +65,29 @@
   sudo: yes
 
 - name: copy wallpaper image
-  copy: src=korra_masseffect_wallpaper.png dest=/home/{{ normal_user }}/.wallpaper owner={{ normal_user }} group=users
+  copy: src=korra_masseffect_wallpaper.png dest=/home/{{ archlinux.username }}/.wallpaper owner={{ archlinux.username }} group=users
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: template feh wallpaper script
-  template: src=fehbg dest=/home/{{ normal_user }}/.fehbg owner={{ normal_user }} group=users
+  template: src=fehbg dest=/home/{{ archlinux.username }}/.fehbg owner={{ archlinux.username }} group=users
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: template i3 configuration
-  template: src=i3/config dest=/home/{{ normal_user }}/.i3/config owner={{ normal_user }} group=users
+  template: src=i3/config dest=/home/{{ archlinux.username }}/.i3/config owner={{ archlinux.username }} group=users
   sudo: yes
 
 - name: template i3status configuration
-  template: src=i3/i3status dest=/home/{{ normal_user }}/.i3/i3status owner={{ normal_user }} group=users
+  template: src=i3/i3status dest=/home/{{ archlinux.username }}/.i3/i3status owner={{ archlinux.username }} group=users
   sudo: yes
 
 - name: template .bashrc
   sudo: yes
-  template: src=bashrc dest=/home/{{ normal_user}}/.bashrc owner={{ normal_user }} group=users
+  template: src=bashrc dest=/home/{{ archlinux.username}}/.bashrc owner={{ archlinux.username }} group=users
 
 - name: template Xresources
-  template: src=Xresources dest=/home/{{ normal_user }}/.Xresources owner={{ normal_user }} group=users
+  template: src=Xresources dest=/home/{{ archlinux.username }}/.Xresources owner={{ archlinux.username }} group=users
   sudo: yes
 
 - name: install pulseaudio/alsa
@@ -146,7 +146,7 @@
     - openssh
     - virtualbox
     - vagrant
-    
+
 - name: configure virtualbox kernel modules
   template: src=virtualbox.conf dest=/etc/modules-load.d/virtualbox.conf
   sudo: yes
@@ -157,63 +157,64 @@
     - fuse
     - gtkmm
     - linux-headers
-  when: install_vmware|bool
+  when: archlinux.vmware|bool
   sudo: yes
 
 - name: template vmware systemd service
   template: src=vmware.service dest=/etc/systemd/system/vmware.service
+  when: archlinux.vmware|bool
   sudo: yes
 
 - name: install vagrant vbguest plugin
   command: "/usr/bin/vagrant plugin install vagrant-vbguest"
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: install vagrant vmware plugin (license required)
   command: /usr/bin/vagrant plugin install vagrant-vmware-workstation
-  when: install_vmware|bool
+  when: archlinux.vmware|bool
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: configure git name
-  command: "/usr/bin/git config --global user.name \"{{ user_real_name }}\""
+  command: "/usr/bin/git config --global user.name \"{{ archlinux.git.name }}\""
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: configure git email
-  command: "/usr/bin/git config --global user.email \"{{ user_email }}\""
+  command: "/usr/bin/git config --global user.email \"{{ archlinux.git.email }}\""
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: install jekyll
   gem: name=jekyll state=present
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: create .vimrc directory
-  file: path="/home/{{ normal_user }}/.vim/bundle" owner={{ normal_user }} group=users state=directory
+  file: path="/home/{{ archlinux.username }}/.vim/bundle" owner={{ archlinux.username }} group=users state=directory
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: install Vundle
-  git: repo=https://github.com/gmarik/Vundle.vim.git dest="/home/{{ normal_user }}/.vim/bundle/Vundle.vim" accept_hostkey=yes
+  git: repo=https://github.com/gmarik/Vundle.vim.git dest="/home/{{ archlinux.username }}/.vim/bundle/Vundle.vim" accept_hostkey=yes
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: template .vimrc
-  template: src=vimrc dest=/home/{{ normal_user }}/.vimrc owner={{ normal_user }} group=users
+  template: src=vimrc dest=/home/{{ archlinux.username }}/.vimrc owner={{ archlinux.username }} group=users
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: install Vundle plugins
   command: "/usr/bin/vim +PluginInstall +qall!"
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: install YouCompleteMe
-  command: "/home/{{ normal_user }}/.vim/bundle/YouCompleteMe/install.sh"
+  command: "/home/{{ archlinux.username }}/.vim/bundle/YouCompleteMe/install.sh"
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: ensure chromium is not installed
   pacman: name=chromium state=absent recurse=yes
@@ -232,9 +233,9 @@
     - git-annex-bin
     - gtk-theme-boje # a nice dark theme
   sudo: yes
-  sudo_user: "{{ normal_user }}"
+  sudo_user: "{{ archlinux.username }}"
 
 - name: vmware instructions
   debug: msg="Install VMWare Workstation manually with '/usr/bin/sh <vmware installer> --eulas-agreed --required --console'"
-  when: install_vmware|bool
+  when: archlinux.vmware|bool
 
