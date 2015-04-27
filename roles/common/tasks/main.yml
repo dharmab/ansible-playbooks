@@ -33,6 +33,16 @@
   become: yes
   when: ansible_os_family == "RedHat"
 
+- name: install fail2ban
+  yum: name=fail2ban
+  become: yes
+  when: ansible_os_family == "RedHat"
+
+- name: enable fail2ban
+  service: name=fail2ban state=started enabled=yes
+  become: yes
+  when: ansible_os_family == "RedHat"
+
 - name: ensure sshd is enabled
   service: name=sshd state=started enabled=yes
   become: yes
@@ -56,6 +66,16 @@
 
 - name: ensure ntp is enabled
   service: name=ntp state=started enabled=yes
+  become: yes
+  when: ansible_os_family == "Debian"
+
+- name: install fail2ban
+  apt: name=fail2ban
+  become: yes
+  when: ansible_os_family == "Debian"
+
+- name: enable fail2ban
+  service: name=fail2ban state=started enabled=yes
   become: yes
   when: ansible_os_family == "Debian"
 
