@@ -1,12 +1,12 @@
-arma_server_hostname: "ArmA 3 Server - Provisioned by Ansible"
-arma_server_password: ""
-arma_server_admin_password: "changeme"
-#arma_server_max_players: 10
+arma.server_hostname: "ArmA 3 Server - Provisioned by Ansible"
+arma.server_password: ""
+arma.server_admin_password: "changeme"
+#arma.server_max_players: 10
 # percentage of players required to pass a vote
-#arma_server_vote_threshold: 0.51
+#arma.server_vote_threshold: 0.51
 # 0 = false, 1 = true
-#arma_server_enable_battleye: 0
-#arma_server_disable_voice: 1
-#arma_server_enable_persistent: 0
+#arma.server_enable_battleye: 0
+#arma.server_disable_voice: 1
+#arma.server_enable_persistent: 0
 # 0 = lowest, 30 = highest
-#arma_server_voice_quality: 0
+#arma.server_voice_quality: 0
