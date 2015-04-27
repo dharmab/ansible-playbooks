@@ -1,3 +1,0 @@
----
-- name: restart gitlab
-  service: name=gitlab state=restarted

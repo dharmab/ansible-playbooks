@@ -15,10 +15,6 @@
   roles:
   - git-annex
 
-- hosts: gitlab
-  roles:
-  - gitlab
-
 - hosts: murmur
   roles:
   - murmur
