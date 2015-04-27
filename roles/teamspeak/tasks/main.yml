@@ -14,17 +14,17 @@
   file: path=/home/teamspeak/Downloads state=directory owner=teamspeak group=users
   become: yes
 
-- name: download TeamSpeak server
+- name: download teamspeak server
   get_url: url="http://dl.4players.de/ts/releases/{{ teamspeak_version }}/teamspeak3-server_linux-amd64-{{ teamspeak_version }}.tar.gz"  dest=/home/teamspeak/Downloads/teamspeak-server-{{ teamspeak_version }}.tar.gz
   become: yes
   become_user: teamspeak
 
-- name: create TeamSpeak directory
+- name: create teamspeak directory
   file: name=/home/teamspeak/teamspeak-server-{{ teamspeak_version }} state=directory owner=teamspeak group=users
   become: yes
 
-- name: extract TeamSpeak
-  unarchive: copy=no src=/home/teamspeak/Downloads/teamspeak-server-{{ teamspeak_version }}.tar.gz dest=/home/teamspeak/teamspeak-server-{{ teamspeak_version }}/  creates=/home/teamspeak/teamspeak-server-{{ teamspeak_version }}/ts3server_linux_amd64/ts3server
+- name: extract teamspeak
+  unarchive: copy=no src=/home/teamspeak/Downloads/teamspeak-server-{{ teamspeak_version }}.tar.gz dest=/home/teamspeak/teamspeak-server-{{ teamspeak_version }}/  creates=/home/teamspeak/teamspeak-server-{{ teamspeak_version }}/teamspeak3-server_linux-amd64
   become: yes
   become_user: teamspeak
   register: teamspeak_updated
@@ -46,6 +46,6 @@
   become: yes
   when: teamspeak_initscript_modified|changed
 
-- name: ensure TeamSpeak is enabled
+- name: enable teamspeak
   service: name="teamspeak-server" state=started enabled=yes
   become: yes

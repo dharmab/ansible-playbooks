@@ -1,8 +1,8 @@
 ---
-- name: Check if operating system is supported
+- name: check if operating system is supported
   assert: that="ansible_os_family == 'Debian'"
 
-- name: install murmur
+- name: install mumble server
   apt: name=mumble-server
   become: yes
 
@@ -10,10 +10,10 @@
   template: src=murmur.ini dest=/etc/murmur.ini
   become: yes
 
-- name: set superuser password
+- name: set mumble superuser password
   command: murmurd -supw {{ murmur_superuser_password }}
   become: yes
 
-- name: Ensure murmur is enabled
+- name: enable mumble server
   service: name=mumble-server state=started enabled=true
   become: yes

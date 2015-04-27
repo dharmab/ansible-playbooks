@@ -1,5 +1,5 @@
 ---
-- name: ensure operating system is supported 
+- name: check if operating system is supported 
   assert: that="ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'"
 
 # Red Hat tasks
@@ -28,7 +28,7 @@
   become: yes
   when: ansible_os_family == "RedHat"
 
-- name: ensure ntp is enabled
+- name: enable network time
   service: name=ntpd state=started enabled=yes
   become: yes
   when: ansible_os_family == "RedHat"
@@ -43,12 +43,12 @@
   become: yes
   when: ansible_os_family == "RedHat"
 
-- name: ensure sshd is enabled
+- name: enable SSH
   service: name=sshd state=started enabled=yes
   become: yes
   when: ansible_os_family == "RedHat"
 
-- name: ensure firewall is enabled
+- name: enable firewall
   service: name=firewalld state=started enabled=yes
   become: yes
   when: ansible_os_family == "RedHat"
@@ -64,7 +64,7 @@
   become: yes
   when: ansible_os_family == "Debian"
 
-- name: ensure ntp is enabled
+- name: enable network time
   service: name=ntp state=started enabled=yes
   become: yes
   when: ansible_os_family == "Debian"
@@ -79,7 +79,7 @@
   become: yes
   when: ansible_os_family == "Debian"
 
-- name: ensure sshd is enabled
+- name: enable SSH
   service: name=ssh state=started enabled=yes
   become: yes
   when: ansible_os_family == "Debian"

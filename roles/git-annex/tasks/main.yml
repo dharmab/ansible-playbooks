@@ -1,5 +1,5 @@
 ---
-- name: ensure operating system is supported
+- name: check if operating system is supported
   assert: that="ansible_os_family == 'RedHat'"
 
 - name: install git-annex
@@ -9,6 +9,3 @@
 - name: create user
   user: name=git createhome=yes
   become: yes
-
-- name: display further instructions
-  debug: msg="Copy SSH keys to server to continue"

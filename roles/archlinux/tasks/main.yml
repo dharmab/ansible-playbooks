@@ -30,7 +30,7 @@
     - alsa-utils
   become: yes
 
-- name: ensure network time is enabled
+- name: enable network time
   service: name=ntpd state=started enabled=yes
   become: yes
 
@@ -216,7 +216,7 @@
   become: yes
   become_user: "{{ archlinux.username }}"
 
-- name: ensure chromium is not installed
+- name: uninstall chromium
   pacman: name=chromium state=absent recurse=yes
   become: yes
 
