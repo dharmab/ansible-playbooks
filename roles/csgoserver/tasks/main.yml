@@ -1,41 +1,41 @@
 ---
 - name: 'install Counter-Strike: Global Offensive dedicated server'
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   command: /home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/steamcmd/csgo/ +app_update 740 +quit
 
 - name: template server.cfg
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   template: src=server.cfg dest=/home/steam/steamcmd/csgo/csgo/server.cfg
 
 - name: copy global gamemode settings
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   copy: src=gamemodes_server.txt dest=/home/steam/steamcmd/csgo/csgo/gamemodes_server.txt
 
 - name: copy arms race gamemode settings
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   copy: src=cfg/gamemode_armsrace.cfg dest=/home/steam/steamcmd/csgo/csgo/cfg/gamemode_armsrace.cfg
 
 - name: copy casual gamemode settings
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   copy: src=cfg/gamemode_casual.cfg dest=/home/steam/steamcmd/csgo/csgo/cfg/gamemode_casual.cfg
 
 - name: copy competitive gamemode settings
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   copy: src=cfg/gamemode_competitive.cfg dest=/home/steam/steamcmd/csgo/csgo/cfg/gamemode_competitive.cfg
 
 - name: copy deathmatch gamemode settings
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   copy: src=cfg/gamemode_deathmatch.cfg dest=/home/steam/steamcmd/csgo/csgo/cfg/gamemode_deathmatch.cfg
 
 - name: copy demolition gamemode settings
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   copy: src=cfg/gamemode_demolition.cfg dest=/home/steam/steamcmd/csgo/csgo/cfg/gamemode_demolition.cfg
 

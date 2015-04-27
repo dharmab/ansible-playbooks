@@ -1,25 +1,25 @@
 ---
 - name: install Team Fortress 2 dedicated server
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   command: /home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/steamcmd/tf2 +app_update 232250 +quit
 
 - name: template server.cfg
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   template: src=server.cfg dest=/home/steam/steamcmd/tf2/tf/cfg/server.cfg 
 
 - name: template message of the day
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   template: src=motd.txt dest=/home/steam/steamcmd/tf2/tf/cfg/motd.txt
 
 - name: template map cycle list
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   template: src=mapcycle.txt dest=/home/steam/steamcmd/tf2/tf/cfg/mapcycle.txt
 
 - name: template whitelist
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   template: src=pure_server_whitelist.txt dest=/home/steam/steamcmd/tf2/tf/cfg/mapcycle.txt

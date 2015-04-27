@@ -8,28 +8,28 @@
     - "Arma 3"
     - "Arma 3 - Other Profiles"
     - "Arma 3 - Other Profiles/server"
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
 
 - name: template Arma 3 server install script
   template: src=arma3-update.jinja2 dest=/home/steam/steamcmd/arma3-update
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
 
 - name: download or update Arma 3 server
   command: /home/steam/steamcmd/steamcmd.sh +runscript /home/steam/steamcmd/arma3-update
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
 
 - name: template server.cfg
   template: src=server.cfg dest=/home/steam/arma3/server.cfg
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
 
 - name: copy Arma3Profile
   copy: src=server.Arma3Profile dest="/home/steam/.local/share/Arma 3 - Other Profiles/server/server.Arma3Profile"
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
 
 - name: open firewall ports
   firewalld: port={{ item }} permanent=true state=enabled
@@ -37,6 +37,6 @@
     - 2302/udp # Client
     - 2303/udp # Steam query
     - 2304/udp # Steam master
-  sudo: yes
+  become: yes
   notify:
     - reload firewall

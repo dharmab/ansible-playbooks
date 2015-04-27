@@ -7,30 +7,30 @@
   with_items:
     - openssh-server
     - postfix
-  sudo: yes
+  become: yes
 
 - name: enable dependencies
   service: name={{ item }} state=running enabled=yes
   with_items:
     - sshd
     - postfix
-  sudo: yes
+  become: yes
 
 - name: install gitlab
   yum: name={{ gitlab_omnibus_package_url }}
-  sudo: yes
+  become: yes
   register: gitlab
   notify: restart gitlab
 
 - name: template gitlab.rb
   template: src=gitlab.rb dest=/etc/gitlab/gitlab.rb
-  sudo: yes
+  become: yes
   register: gitlab_rb
   notify: restart gitlab
 
 - name: configure gitlab
   command: gitlab-ctl reconfigure
-  sudo: yes
+  become: yes
   when: gitlab|changed or gitlab_rb|changed
   notify: restart gitlab
 
@@ -40,9 +40,9 @@
     - 22/tcp
     - 80/tcp
     - 443/tcp
-  sudo: yes
+  become: yes
   notify: reload firewall
 
 - name: start gitlab
   command: gitlab-ctl start
-  sudo: yes
+  become: yes

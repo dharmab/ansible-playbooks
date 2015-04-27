@@ -4,11 +4,11 @@
 
 - name: install git-annex
   yum: name=git-annex
-  sudo: yes
+  become: yes
 
 - name: create user
   user: name=git createhome=yes
-  sudo: yes
+  become: yes
 
 - name: display further instructions
   debug: msg="Copy SSH keys to server to continue"

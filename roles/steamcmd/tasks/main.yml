@@ -19,20 +19,20 @@
   register: steamcmd
 
 - name: download steamcmd
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   get_url: url=http://media.steampowered.com/installer/steamcmd_linux.tar.gz dest=/home/steam/steamcmd/steamcmd_linux.tar.gz
   when: steamcmd.stat.exists == false
 
 - name: extract steamcmd
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   unarchive: src=/home/steam/steamcmd/steamcmd_linux.tar.gz dest=/home/steam/steamcmd/ copy=no
   when: steamcmd.stat.exists == false
 
 - name: attempt to log into steam
-  sudo: yes
-  sudo_user: steam
+  become: yes
+  become_user: steam
   command: /home/steam/steamcmd/steamcmd.sh +login {{ steam_user_name }} {{ steam_user_password }} +quit
   async: 60
   poll: 5

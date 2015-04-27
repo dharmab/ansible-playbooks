@@ -4,16 +4,16 @@
 
 - name: install murmur
   apt: name=mumble-server
-  sudo: yes
+  become: yes
 
 - name: template murmur.ini
   template: src=murmur.ini dest=/etc/murmur.ini
-  sudo: yes
+  become: yes
 
 - name: set superuser password
   command: murmurd -supw {{ murmur_superuser_password }}
-  sudo: yes
+  become: yes
 
 - name: Ensure murmur is enabled
   service: name=mumble-server state=started enabled=true
-  sudo: yes
+  become: yes
