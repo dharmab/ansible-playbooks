@@ -4,8 +4,8 @@ Supported OS: CentOS 7.0 x64
 Provisions a server as an ArmA 3 Dedicated server.
 
 ## Variables
-* `steam.user_name` (string) - A valid Steam username. Do not use a Steam account that has purchased content or is used for playing games. Create a new Steam account with no purchases for use with dedicated server software.
-* `steam.user_password` (string) - The password to the Steam account defined by `steam_user_name`.
+* `steam.user.name` (string) - A valid Steam username. Do not use a Steam account that has purchased content or is used for playing games. Create a new Steam account with no purchases for use with dedicated server software.
+* `steam.user.password` (string) - The password to the Steam account defined by `steam.user.name`.
 * `arma.server_hostname` (string) - The server name displayed in the in-game server browser.
 * `arma.server_password` (string) - The server password required to connect to the server.
 * `arma.server_admin_password` (string) - The password to obtain admin privileges while in-game.

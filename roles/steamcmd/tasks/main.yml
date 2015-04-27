@@ -33,7 +33,7 @@
 - name: attempt to log into steam
   become: yes
   become_user: steam
-  command: /home/steam/steamcmd/steamcmd.sh +login {{ steam_user_name }} {{ steam_user_password }} +quit
+  command: /home/steam/steamcmd/steamcmd.sh +login {{ steam.user.name }} {{ steam.user.password }} +quit
   async: 60
   poll: 5
   register: steam_login
