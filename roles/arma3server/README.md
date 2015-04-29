@@ -10,9 +10,9 @@ Provisions a server as an ArmA 3 Dedicated server.
 * `arma.server_password` (string) - The server password required to connect to the server.
 * `arma.server_admin_password` (string) - The password to obtain admin privileges while in-game.
 * `arma.server_max_players` (int) - Maximum number of players the dedicated server will allow to connect.
-`arma.server_vote_threshold` (decimal in range 0.01 - 1.00 inclusive) = Percentage of players required to pass a vote, e.g. to change missions or elect a server admin.
+* `arma.server_vote_threshold` (decimal in range 0.01 - 1.00 inclusive) = Percentage of players required to pass a vote, e.g. to change missions or elect a server admin.
 * `arma.server_enable_battleye` (int) - 0 to disable BattlEye anti-cheat, 1 to enable BattlEye anti-cheat. Reccomended setting is to disable for private servers with active moderation and enable otherwise.
-* `arma.server_disable_voice` (int) - 0 to enable in-game voice chat, 1 to disable in-game voice chat. Reccomended setting is to disable if server is using a thiry-party voice chat solution (e.g. TeamSpeak) and enable otherwise.
+* `arma.server_disable_voice` (int) - 0 to enable in-game voice chat, 1 to disable in-game voice chat. Reccomended setting is to disable if server is using a third-party voice chat solution (e.g. TeamSpeak) and enable otherwise.
 * `arma.server_enable_persistent` (int) - 0 to disable persistent battlefield, 1 to enable persistent battlefield. When persistent battlefield is enabled, make missions that have either BASE or INSTANT respawn will continue to run when all players disconnect. This is opposed to the normal behavior, where the current mission ends if all players disconnect.
 * `arma.server_voice_quality` (int in range 0-30 inclusive) - If in-game voice chat is enabled, this setting determines the audio quality. 0 is the lowest quality and 30 is the highest quality.
 
