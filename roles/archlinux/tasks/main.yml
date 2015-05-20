@@ -52,7 +52,7 @@
     - i3status
     - dmenu
     - lightdm
-    - lightdm-gtk3-greeter
+    - lightdm-gtk-greeter
     - lxappearance
     - arandr
     - elementary-icon-theme
@@ -129,14 +129,16 @@
     # Ruby
     - ruby
     # Java
-    - jdk7-openjdk
-    - openjdk7-doc
-    - openjdk7-src
     - jdk8-openjdk
     - openjdk8-doc
     - openjdk8-src
     - apache-ant
     - maven
+    # Scala
+    - scala
+    - scala-docs
+    - scala-sources
+    - sbt
     # Version Control
     - git
     - subversion
@@ -238,4 +240,3 @@
 - name: vmware instructions
   debug: msg="Install VMWare Workstation manually with '/usr/bin/sh <vmware installer> --eulas-agreed --required --console'"
   when: archlinux.vmware|bool
-
