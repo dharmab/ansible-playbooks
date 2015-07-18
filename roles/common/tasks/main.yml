@@ -3,18 +3,8 @@
   assert: that="ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'"
 
 # Red Hat tasks
-- name: install EPEL bootstrap repository
-  copy: src=epel-bootstrap.repo dest=/etc/yum.repos.d/
-  become: yes
-  when: ansible_os_family == "RedHat"
-
 - name: install EPEL repository
-  yum: name=epel-release enablerepo=epel-bootstrap
-  become: yes
-  when: ansible_os_family == "RedHat"
-
-- name: enable EPEL repository
-  ini_file: dest=/etc/yum.repos.d/epel.repo section=epel option=enabled value=1
+  yum: name=epel-release
   become: yes
   when: ansible_os_family == "RedHat"
 
