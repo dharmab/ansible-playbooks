@@ -1,0 +1,9 @@
+- name: vheck if operating system is supported
+  assert: that="ansible_os_family == 'RedHat'"
+
+- name: open firewall ports
+  firewalld: port={{ item }} permanent=true state=enabled
+  with_items:
+    - 27015/tcp # Game
+    - 27015/udp # Game
+    - 27020/udp # SourceTV
