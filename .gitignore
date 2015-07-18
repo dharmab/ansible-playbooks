@@ -1,2 +1,4 @@
 .vagrant/
 extra_vars/
+host_vars/
+
