@@ -1,0 +1,7 @@
+steam:
+  user:
+    name: 'anonymous'
+    password: ''
+csgo:
+  server:
+    lan: 0
