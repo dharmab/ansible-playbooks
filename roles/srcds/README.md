@@ -1,0 +1,1 @@
+This role opens firewall ports for the Source Dedicated Server. This is a dependency for game servers which run the Source engine.
