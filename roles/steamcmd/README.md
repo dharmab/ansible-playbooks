@@ -1,0 +1,6 @@
+The role automates SteamCMD, the command line version of Steam. It is a dependency for roles which automate game servers for Steam games.
+
+## Variables
+- `steam.user` (hash) - Credentials for a valid Steam account. This is not required for most game servers. The default is to use an anonymous login instead. If this is used, **do not use your normal Steam account**! The credentials for this account will be cached on the server. It is recommened to only define account credentials if absolutely necessary, and to create a new and separate Steam account for this purpose. If Steam Guard two-factor authentication is enabled for this account, manuall intervention is required for the first run of this role on a server.
+- `steam.user.name` (string) - The username of the Steam user to authenticate as. The default is 'anonymous'.
+- `steam.user.password` (string) - The password for the Steam user to authenticate as. The default is the empty string, which is valid for the anonymous account. **This should be kept secret.**
