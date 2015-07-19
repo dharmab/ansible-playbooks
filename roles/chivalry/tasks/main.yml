@@ -1,0 +1,5 @@
+---
+- name: 'install Chivaltry: Medieval Warfare dedicated server'
+  become: yes
+  become_user: steam
+  command: /home/steam/steamcmd.sh +login anonymous +force_install_dir /home/steam/steamcmd/chivalry/ +app_update 220070 +quit
