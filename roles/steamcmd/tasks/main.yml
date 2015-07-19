@@ -1,7 +1,4 @@
 ---
-- name: check if operating system is supported
-  assert: that="ansible_os_family == 'RedHat'"
-
 - name: install 32-bit libraries
   yum: name={{ item }}
   with_items:

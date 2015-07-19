@@ -1,8 +1,4 @@
 ---
-- name: reload firewall
-  service: name=firewalld state=reloaded
-  become: yes
-
 - name: restart ntp
   service: name=ntpd state=restarted
   become: yes

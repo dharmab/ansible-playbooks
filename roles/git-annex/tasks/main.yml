@@ -1,7 +1,4 @@
 ---
-- name: check if operating system is supported
-  assert: that="ansible_os_family == 'RedHat'"
-
 - name: install git-annex
   yum: name=git-annex
   become: yes

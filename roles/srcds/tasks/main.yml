@@ -1,6 +1,4 @@
-- name: check if operating system is supported
-  assert: that="ansible_os_family == 'RedHat'"
-
+---
 - name: open firewall ports
   firewalld: port={{ item }} permanent=true state=enabled
   with_items:

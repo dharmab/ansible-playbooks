@@ -1,0 +1,35 @@
+---
+- name: check if operating system is supported 
+  assert: that="ansible_os_family == 'RedHat'
+
+- name: install EPEL repository
+  yum: name=epel-release
+  become: yes
+
+- name: update all packages
+  yum: name=* state=latest
+  become: yes
+
+- name: install ntp
+  yum: name=ntp state=present
+  become: yes
+
+- name: enable network time
+  service: name=ntpd state=started enabled=yes
+  become: yes
+
+- name: install fail2ban
+  yum: name=fail2ban
+  become: yes
+
+- name: enable fail2ban
+  service: name=fail2ban state=started enabled=yes
+  become: yes
+
+- name: enable SSH
+  service: name=sshd state=started enabled=yes
+  become: yes
+
+- name: enable firewall
+  service: name=firewalld state=started enabled=yes
+  become: yes
