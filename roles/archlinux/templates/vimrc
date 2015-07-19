@@ -13,7 +13,12 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'chriskempson/base16-vim'
 
 " YouCompleteMe completions
-Plugin 'Valloric/YouCompleteMe'
+" YouCompleteMe is nicer than SuperTab but requires additional setup
+"Plugin 'Valloric/YouCompleteMe'
+
+" SuperTab completions
+" Simpler than YouCompleteMe, but works out of the box
+Plugin 'ervandew/supertab'
 
 " Emmet
 Plugin 'mattn/emmet-vim'
