@@ -1,5 +1,18 @@
 ---
-- name: 'install Chivaltry: Medieval Warfare dedicated server'
+- name: 'install Chivalry: Medieval Warfare dedicated server'
   become: yes
   become_user: steam
   command: /home/steam/steamcmd.sh +login anonymous +force_install_dir /home/steam/steamcmd/chivalry/ +app_update 220070 +quit
+
+- name: 'open Chivalry: Medieval Warfare firewall ports'
+  firewalld: port={{ item }} permanent=true state=enabled
+  with_items:
+    - 7777/tcp
+    - 7777/udp
+    - 7778/tcp
+    - 7778/udp
+    - 27015/tcp
+    - 27015/udp
+  become: yes
+
+
