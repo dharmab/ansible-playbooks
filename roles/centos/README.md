@@ -1,0 +1,1 @@
+Base role for Red Hat/CentOS servers. Updates the operating system and maintains core system packages.

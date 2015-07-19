@@ -1,0 +1,1 @@
+Base role for Debian servers. Updates the operating system and maintains core system packages.

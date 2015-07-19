@@ -1,0 +1,1 @@
+Base role common to both Red Hat and Debian servers.
