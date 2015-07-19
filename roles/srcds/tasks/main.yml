@@ -1,5 +1,5 @@
 ---
-- name: open firewall ports
+- name: open firewall ports for Source Dedicated Server
   firewalld: port={{ item }} permanent=true state=enabled
   with_items:
     - 27015/tcp # Game

@@ -5,11 +5,11 @@
 
 - hosts: arma3
   roles:
-  - arma3server
+  - arma3
 
 - hosts: csgo
   roles:
-  - csgoserver
+  - csgo
 
 - hosts: git-annex
   roles:
@@ -25,4 +25,4 @@
 
 - hosts: tf2
   roles:
-  - tf2server
+  - tf2
