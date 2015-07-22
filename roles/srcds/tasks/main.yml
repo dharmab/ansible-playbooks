@@ -5,3 +5,6 @@
     - 27015/tcp # Game
     - 27015/udp # Game
     - 27020/udp # SourceTV
+  become: yes
+  notify:
+    - reload firewall

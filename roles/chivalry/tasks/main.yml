@@ -14,5 +14,6 @@
     - 27015/tcp
     - 27015/udp
   become: yes
-
+  notify:
+    - reload firewall
 

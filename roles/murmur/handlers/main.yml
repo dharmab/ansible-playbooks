@@ -1,0 +1,4 @@
+---
+- name: restart murmur
+  service: name=murmur state=started enabled=true
+  become: yes
