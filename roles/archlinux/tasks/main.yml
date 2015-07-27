@@ -112,7 +112,6 @@
   become: yes
 
 - name: install development enviornment
-  become: yes
   pacman: name={{ item }} state=present
   with_items:
     # C/C++
@@ -141,13 +140,14 @@
     - sbt
     # Version Control
     - git
-    - subversion
     # Editors
     - gvim
     # Other tools
     - openssh
     - virtualbox
     - vagrant
+    - ansible
+  become: yes
 
 - name: configure virtualbox kernel modules
   template: src=virtualbox.conf dest=/etc/modules-load.d/virtualbox.conf
@@ -212,15 +212,6 @@
   command: "/usr/bin/vim +PluginInstall +qall!"
   become: yes
   become_user: "{{ archlinux.username }}"
-
-- name: install YouCompleteMe
-  command: "/home/{{ archlinux.username }}/.vim/bundle/YouCompleteMe/install.sh"
-  become: yes
-  become_user: "{{ archlinux.username }}"
-
-- name: uninstall chromium
-  pacman: name=chromium state=absent recurse=yes
-  become: yes
 
 - name: install AUR packages
   packer: name={{ item }}

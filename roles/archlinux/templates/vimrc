@@ -43,6 +43,9 @@ Plugin 'kien/ctrlp.vim'
 " Ansible syntax and indentation
 Plugin 'chase/vim-ansible-yaml'
 
+" Salt syntax and indentation
+Plugin 'saltstack/salt-vim'
+
 " Automatically close parentheses, etc.
 Plugin 'Raimondi/delimitMate'
 
@@ -65,7 +68,7 @@ set secure
 try
     colorscheme base16-monokai
 catch
-    colorscheme desert
+    colorscheme slate
 endtry
 set background=dark
 syntax on
