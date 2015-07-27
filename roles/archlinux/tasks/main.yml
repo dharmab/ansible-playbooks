@@ -28,6 +28,8 @@
     - openssh
     - ntp
     - alsa-utils
+    - htop
+    - nmap
   become: yes
 
 - name: enable network time
