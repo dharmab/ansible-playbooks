@@ -128,4 +128,4 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " Multiple cursors tweaks
 " Since we bound Ctrl+P, we have to rebind previous selection
-let g:multi_curosr_prev_key='<C-b>'
+let g:multi_cursor_prev_key='<C-b>'
