@@ -1,4 +1,4 @@
 ---
 - name: restart murmur
-  service: name=murmur state=started enabled=true
+  service: name=mumble-server state=restarted enabled=true
   become: yes

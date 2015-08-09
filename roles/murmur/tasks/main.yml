@@ -6,13 +6,15 @@
 - name: template murmur.ini
   template: src=murmur.ini dest=/etc/murmur.ini
   become: yes
+  notify:
+    - restart murmur
 
 - name: set mumble superuser password
   command: murmurd -supw {{ murmur_superuser_password }}
   become: yes
+  notify:
+    - restart murmur
 
 - name: enable mumble server
   service: name=mumble-server state=started enabled=true
   become: yes
-  notify:
-    - restart murmur
