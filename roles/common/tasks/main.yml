@@ -1,3 +1,4 @@
 ---
 - name: check if operating system is supported 
   assert: that="ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'"
+

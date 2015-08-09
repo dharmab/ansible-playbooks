@@ -1,3 +1,8 @@
+[all:children]
+git-annex
+murmur
+teamspeak
+
 [git-annex]
 annex.dharmab.com
 

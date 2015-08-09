@@ -22,6 +22,12 @@
   yum: name=fail2ban
   become: yes
 
+- name: populate fail2ban whitelist
+  ini_file: dest=/etc/fail2ban/jail.conf section=DEFAULT option=ignoreip value="127.0.0.1/8 {{ common_fail2ban_whitelist | join(' ') }}"
+  become: yes
+  notify: 
+    - restart fail2ban
+
 - name: enable fail2ban
   service: name=fail2ban state=started enabled=yes
   become: yes
