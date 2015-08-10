@@ -226,7 +226,7 @@
     - intellij-idea-ultimate-edition
     - sublime-text-dev
     - git-annex-bin
-    - gtk-theme-boje # a nice dark theme
+    - menda-themes-dark # a nice dark theme
   become: yes
   become_user: "{{ archlinux.username }}"
 
