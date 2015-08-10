@@ -1,0 +1,7 @@
+[Unit]
+Description=Google Cloud Storage Driver
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/sysconfig/gcs-storage
+ExecStart=/usr/bin/gcsfuse {{ storage_bucket }} /storage

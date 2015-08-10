@@ -26,3 +26,7 @@
 - hosts: tf2
   roles:
   - tf2
+
+- hosts: storage
+  roles:
+  - storage
