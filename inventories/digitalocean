@@ -4,13 +4,13 @@ murmur
 teamspeak
 
 [git-annex]
-annex.dharmab.com
+annex.dharmab.com ansible_ssh_user=root
 
 [murmur]
-voice.dharmab.com
+voice.dharmab.com  ansible_ssh_user=root
 
 [teamspeak]
-voice.dharmab.com
+voice.dharmab.com ansible_ssh_user=root
 
 [storage]
-storage.dharmab.com
+storage.dharmab.com ansible_ssh_user=root
