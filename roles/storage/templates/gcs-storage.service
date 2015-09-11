@@ -1,0 +1,11 @@
+[Unit]
+Description=Google Cloud Storage {{ storage_bucket }} Bucket
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/sysconfig/gcs-storage
+ExecStart=/usr/bin/gcsfuse {{ storage_bucket }} /storage
+
+[Install]
+Wants=multi-user.target
+

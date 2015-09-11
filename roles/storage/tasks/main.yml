@@ -1,0 +1,33 @@
+---
+- name: Install file transfer utilites
+  yum: name={{ item }}
+  with_items:
+    - aria2
+    - rsync
+  become: yes
+
+- name: Install gcsfuse dependencies
+  yum: name={{ item }}
+  with_items:
+    - fuse
+  become: yes
+
+- name: Install gcsfuse
+  yum: name=https://github.com/GoogleCloudPlatform/gcsfuse/releases/download/v0.9.0/gcsfuse-0.9.0-1.x86_64.rpm
+  become: yes
+
+- name: Create mountpoint
+  file: name=/storage state=directory owner=root group=root
+  become: yes
+
+- name: Set Google Applications Credentials path
+  copy: content="GOOGLE_APPLICATION_CREDENTIALS=/root/gcp-credentials.json" dest=/etc/sysconfig/gcs-storage
+  become: yes
+
+- name: Template gcsfuse service unit
+  template: src=gcs-storage.service dest=/etc/systemd/system/gcs-storage.service
+  become: yes
+
+- name: Start storage service
+  service: name=gcs-storage state=started enabled=yes
+  become: yes
