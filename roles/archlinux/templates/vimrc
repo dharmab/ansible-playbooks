@@ -52,6 +52,11 @@ Plugin 'Raimondi/delimitMate'
 " Hotkeys for commenting/uncommenting
 Plugin 'tpope/vim-commentary'
 
+" Markdown Preview
+Plugin 'kannokanno/previm'
+
+
+
 call vundle#end()
 filetype plugin indent on
 " END VUNDLE CONFIG
@@ -129,3 +134,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " Multiple cursors tweaks
 " Since we bound Ctrl+P, we have to rebind previous selection
 let g:multi_cursor_prev_key='<C-b>'
+
+" Command to open browser for Markdown Preview
+let g:previm_open_cmd = 'google-chrome-stable'
+
