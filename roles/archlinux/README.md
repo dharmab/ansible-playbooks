@@ -10,7 +10,6 @@ Wallpaper image credits:
 * `archlinux.username` (string) - The username of the non-root user this role will create and configure
 * `archlinux.git.name` (string) - The non-root user's real name (used for git commits)
 * `archlinux.git.email` (string) - The non-root user's email address (used for git commits)
-* `archlinux.vmware` (boolean) - If true, VMware Workstation dependencies and configuration files will be installed. If false, these will not be installed. Workstation itself must be installed and enabled manually (see usage notes)
 
 ## Usage Notes
 
@@ -30,15 +29,8 @@ Install [Packer](https://aur.archlinux.org/packages/packer/) from the AUR.
 
 Become the root user and run the playbook:
 ```bash
-ansible-playbook -i localhost -c local --extra-vars '{"archlinux": {"username": "john", "git": {"name": "John Doe", "email": "john.doe@example.com"},"vmware": false}}' site.yml
+ansible-playbook -i localhost -c local --extra-vars '{"archlinux": {"username": "john", "git": {"name": "John Doe", "email": "john.doe@example.com"}}}' site.yml
 ```
 
 You will have to set the non-root user's password and sudo privileges manually using `passwd` and `visudo`. Enabling sudo access for the `wheel` group should suffice, e.g. `%wheel ALL=(ALL) ALL`.
 
-To install VMware Workstation, run the playbook with `archlinux.vmware` set to true, then run the following:
-
-```bash
-sh <vmware installer file> --console --eulas-agreed --required
-systemctl start vmware
-systemctl enable vmware
-```
