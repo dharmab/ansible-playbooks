@@ -175,8 +175,6 @@
     - flake8
   become: yes
 
-
-
 - name: configure virtualbox kernel modules
   template: src=virtualbox.conf dest=/etc/modules-load.d/virtualbox.conf
   become: yes
@@ -216,3 +214,7 @@
   become: yes
   become_user: "{{ archlinux.username }}"
 
+- name: install YouCompleteMe
+  command: "python2 /home/{{ archlinux.username }}/.vim/bundle/YouCompleteMe/install.py --clang-completer"
+  become: yes
+  become_user: "{{ archlinux.username }}"
