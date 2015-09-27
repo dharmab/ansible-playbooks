@@ -1,6 +1,10 @@
 ---
+- name: update pacman cache
+  pacman: update_cache=yes
+  become: yes
+
 - name: install reflector
-  pacman: name=reflector state=present update_cache=yes
+  pacman: name=reflector state=present
   become: yes
 
 - name: check if mirrorlist was recently updated
