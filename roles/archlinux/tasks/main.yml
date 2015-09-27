@@ -163,6 +163,20 @@
     - ansible
   become: yes
 
+- name: install python 2 development packages
+  pip: name={{ item }} state=present executable=pip2
+  with_items:
+    - flake8
+  become: yes
+
+- name: install python 3 development packages
+  pip: name={{ item }} state=present
+  with_items:
+    - flake8
+  become: yes
+
+
+
 - name: configure virtualbox kernel modules
   template: src=virtualbox.conf dest=/etc/modules-load.d/virtualbox.conf
   become: yes

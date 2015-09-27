@@ -12,6 +12,9 @@ Plugin 'gmarik/Vundle.vim'
 " Base16 colors
 Plugin 'chriskempson/base16-vim'
 
+" Syntastic syntax checking
+Plugin 'scrooloose/syntastic'
+
 " YouCompleteMe completions
 " YouCompleteMe is nicer than SuperTab but requires additional setup
 "Plugin 'Valloric/YouCompleteMe'
@@ -138,3 +141,12 @@ let g:multi_cursor_prev_key='<C-b>'
 " Command to open browser for Markdown Preview
 let g:previm_open_cmd = 'google-chrome-stable'
 
+" Recommended defaults for Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
