@@ -167,11 +167,6 @@
   template: src=virtualbox.conf dest=/etc/modules-load.d/virtualbox.conf
   become: yes
 
-- name: install vagrant vbguest plugin
-  command: "/usr/bin/vagrant plugin install vagrant-vbguest"
-  become: yes
-  become_user: "{{ archlinux.username }}"
-
 - name: configure git name
   command: "/usr/bin/git config --global user.name \"{{ archlinux.git.name }}\""
   become: yes
