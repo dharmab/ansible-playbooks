@@ -12,5 +12,3 @@ voice.dharmab.com  ansible_ssh_user=root
 [teamspeak]
 voice.dharmab.com ansible_ssh_user=root
 
-[storage]
-storage.dharmab.com ansible_ssh_user=root

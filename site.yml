@@ -1,8 +1,4 @@
 ---
-- hosts: archlinux
-  roles:
-  - archlinux
-
 - hosts: arma3
   roles:
   - arma3
@@ -27,6 +23,3 @@
   roles:
   - tf2
 
-- hosts: storage
-  roles:
-  - storage
